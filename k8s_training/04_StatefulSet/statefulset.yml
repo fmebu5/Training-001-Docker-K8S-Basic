@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: hello-app
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: hello-app
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: hello-app 
+  serviceName: "web"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello-app 
+    spec:
+      containers:      
+        - name: hello-app
+          image: gcr.io/google-samples/hello-app:1.0

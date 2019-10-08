@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: hello-world
+        env: dev
+    spec:
+      containers:
+        - name: hello-app
+          image: gcr.io/google-samples/hello-app:1.0
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-world
+spec:
+  selector:
+    app: hello-world
+    env: dev
+  type: NodePort
+  ports:
+    - port: 8080

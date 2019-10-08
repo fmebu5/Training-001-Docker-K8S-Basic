@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-job
+spec:
+  template:
+    metadata:
+      name: hello-job
+      labels:
+        job: hello
+    spec:
+      containers:
+      - name: alpine
+        image: alpine
+        command: ["/bin/sh", "-c", "echo Hello World from the job"]
+      restartPolicy: OnFailure

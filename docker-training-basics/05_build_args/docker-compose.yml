@@ -1,0 +1,15 @@
+version: '3'
+services:
+  main:
+    environment:
+        - VERSION="1.2.5"
+    build:
+        context: .
+        args:
+            - http_proxy
+            - https_proxy
+            - no_proxy
+            - VERSION="1.2.4"
+            - PARAM1=any_parameter_value
+            - PARAM2
+    image: training/build_args:$VERSION

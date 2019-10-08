@@ -1,0 +1,13 @@
+version: '3'
+services:
+  helloworld:
+    build:
+        context: .
+        args:
+            - http_proxy
+            - https_proxy
+            - no_proxy
+    image: hashicorp/http-echo
+    command: -text="hello world"
+    ports:
+    - 5678:5678
